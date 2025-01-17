@@ -1,4 +1,5 @@
 using Application;
+using Persistence;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices();
+builder.Services.AddPersistenceService(builder.Configuration);
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
