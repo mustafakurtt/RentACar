@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="Core.Persistence">
       <HintPath>..\..\..\corePackages\Core.Packages\Core.Persistence\bin\Debug\net9.0\Core.Persistence.dll</HintPath>
     </Reference>

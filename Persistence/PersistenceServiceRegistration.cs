@@ -14,6 +14,13 @@ public static class PersistenceServiceRegistration
     {
         service.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("RentACarDb")));
         service.AddScoped<IBrandRepository, BrandRepository>();
+        service.AddScoped<ICarRepository, CarRepository>();
+        service.AddScoped<IColorRepository, ColorRepository>();
+        service.AddScoped<IFuelRepository, FuelRepository>();
+        service.AddScoped<IModelRepository, ModelRepository>();
+        service.AddScoped<ITransmissionRepository, TransmissionRepository>();
+        service.AddScoped<ITypeRepository, TypeRepository>();
+
         return service;
     }
 }

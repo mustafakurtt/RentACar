@@ -19,10 +19,10 @@ if (app.Environment.IsDevelopment())
     {
         options
             .WithTitle("RentACar")
-            .WithTheme(ScalarTheme.Mars)
-            .WithDefaultHttpClient(ScalarTarget.CSharp, ScalarClient.HttpClient);
+            .WithTheme(ScalarTheme.Mars);
     });
 }
+
 
 app.UseHttpsRedirection();
 
