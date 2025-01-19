@@ -1,5 +1,7 @@
 ﻿using Application.Features.Types.Commands.Create;
 using Application.Features.Types.Commands.CreateRange;
+using Application.Features.Types.Commands.Delete;
+using Application.Features.Types.Commands.Update;
 using Application.Features.Types.Queries.GetList;
 using Core.Application.Requests;
 using MediatR;
@@ -35,6 +37,23 @@ public class TypesController : BaseController
             PageRequest = pageRequest
         };
         var response = await Mediator.Send(getListTypeQuery);
+        return Ok(response);
+    }
+
+    //update
+    [HttpPut("update")]
+    public async Task<IActionResult> Update([FromBody] UpdateTypeCommand updateTypeCommand)
+    {
+        var response = await Mediator.Send(updateTypeCommand);
+        return Ok(response);
+    }
+
+    //delete
+    [HttpDelete("delete/{id}")]
+    public async Task<IActionResult> Delete([FromRoute] Guid id)
+    {
+        DeleteTypeCommand deleteTypeCommand = new() { Id = id };
+        var response = await Mediator.Send(deleteTypeCommand);
         return Ok(response);
     }
 }

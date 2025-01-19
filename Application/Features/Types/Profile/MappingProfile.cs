@@ -1,5 +1,7 @@
 ﻿using Application.Features.Types.Commands.Create;
 using Application.Features.Types.Commands.CreateRange;
+using Application.Features.Types.Commands.Delete;
+using Application.Features.Types.Commands.Update;
 using Application.Features.Types.Queries.GetList;
 using Core.Application.Responses;
 using Core.Persistence.Paging;
@@ -18,5 +20,10 @@ public class MappingProfile : AutoMapper.Profile
 
         CreateMap<Paginate<Type>, GetListResponse<GetListTypeListItemDto>>().ReverseMap();
         CreateMap<Type, GetListTypeListItemDto>().ReverseMap();
+
+        CreateMap<Type, DeleteTypeCommand>().ReverseMap();
+        CreateMap<Type, DeletedTypeResponse>().ReverseMap();
+
+        CreateMap<Type, UpdatedTypeResponse>().ReverseMap();
     }   
 }

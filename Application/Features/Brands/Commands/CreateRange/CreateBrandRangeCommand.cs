@@ -1,4 +1,5 @@
-﻿using Application.Services.Repositories;
+﻿using Application.Features.Brands.Rules;
+using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -13,13 +14,16 @@ public class CreateBrandRangeCommand : IRequest<ICollection<CreateBrandRangeList
     {
         private readonly IBrandRepository _brandRepository;
         private readonly IMapper _mapper;
-        public CreateRangeBrandCommandHandler(IBrandRepository brandRepository, IMapper mapper)
+        private readonly BrandBusinessRules _brandBusinessRules;
+        public CreateRangeBrandCommandHandler(IBrandRepository brandRepository, IMapper mapper, BrandBusinessRules brandBusinessRules)
         {
             _brandRepository = brandRepository;
             _mapper = mapper;
+            _brandBusinessRules = brandBusinessRules;
         }
         public async Task<ICollection<CreateBrandRangeListItemDto>> Handle(CreateBrandRangeCommand request, CancellationToken cancellationToken)
         {
+            await _brandBusinessRules.BrandNameCannotBeDuplicatedWhenCreateRange(request.BrandNames);
             ICollection<Brand> brands = request.BrandNames.Select(name => new Brand { Name = name, Id = Guid.NewGuid()}).ToList();
             ICollection<Brand> createdBrands = await _brandRepository.AddRangeAsync(brands);
             ICollection<CreateBrandRangeListItemDto> createdBrandsResponse = _mapper.Map<List<CreateBrandRangeListItemDto>>(createdBrands);
