@@ -11,6 +11,7 @@ builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceService(builder.Configuration);
 //builder.Services.AddDistributedMemoryCache();
 builder.Services.AddStackExchangeRedisCache(opt => opt.Configuration = "localhost:6379");
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
